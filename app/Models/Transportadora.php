@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pedido extends Model
+class Transportadora extends Model
 {
     use HasFactory;
 
-    protected $table = 'pedidos';
+    protected $table = 'transportadoras';
 
     protected $fillable = [
-        'vendedor_id',
-        'produto',
-        'quantidade',
-        'valor_total',
+        'nome',
+        'endereco',
+        'email',
+        'telefone',
     ];
 
     protected $hidden = [
@@ -25,14 +25,7 @@ class Pedido extends Model
 
     protected $casts = [
         'id' => 'integer',
-        'vendedor_id' => 'integer',
-        'quantidade' => 'integer',
-        'valor_total' => 'float',
     ];
-
-    public function vendedor() {
-        return $this->belongsTo(Vendedor::class);
-    }
 
     public function etiquetasEntrega() {
         return $this->hasMany(EtiquetaEntrega::class);

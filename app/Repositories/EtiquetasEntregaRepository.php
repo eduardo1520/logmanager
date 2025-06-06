@@ -4,22 +4,18 @@ namespace App\Repositories;
 
 use App\Models\EtiquetaEntrega;
 use Illuminate\Support\Carbon;
+use App\Enums\StatusEtiquetaEntrega;
 
 
-class EtiquetasEntregaRepository
+class EtiquetasEntregaRepository implements EtiquetaEntregaRepositoryInterface
 {
-    public function buscaEtiquetasEntrega(): array
-    {
+    public function buscaEtiquetasEntrega(): array {
         $hoje = Carbon::today();
 
         return [
-            'pendentes' => EtiquetaEntrega::whereNull('data_envio')->count(),
-            'entregues' => EtiquetaEntrega::whereNotNull('data_envio')
-                ->whereDate('data_envio', '<=', $hoje)
-                ->count(),
-            'transito' => EtiquetaEntrega::whereNotNull('data_envio')
-                ->whereDate('data_envio', '>', $hoje)
-                ->count(),
+            StatusEtiquetaEntrega::PENDENTE->value => EtiquetaEntrega::whereNull('data_envio')->count(),
+            StatusEtiquetaEntrega::ENTREGUE->value => EtiquetaEntrega::whereNotNull('data_envio')->whereDate('data_envio', '<=', $hoje)->count(),
+            StatusEtiquetaEntrega::TRANSITO->value => EtiquetaEntrega::whereNotNull('data_envio')->whereDate('data_envio', '>', $hoje)->count(),
         ];
     }
 

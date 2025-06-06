@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransportadoraController;
+use App\Http\Controllers\RastreamentoPedidoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,8 @@ Route::middleware(['splade'])->group(function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/transportadoras', [TransportadoraController::class, 'index'])->name('transportadora');
+Route::get('/rastreamento-pedido', [RastreamentoPedidoController::class, 'index'])->name('rastreamento-pedido');
 
 
 

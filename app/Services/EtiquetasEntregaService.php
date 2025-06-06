@@ -2,26 +2,25 @@
 
 namespace App\Services;
 
-use App\Repositories\EtiquetasEntregaRepository;
+use App\Repositories\EtiquetaEntregaRepositoryInterface;
+use App\Repositories\PedidoRepositoryInterface;
 
 class EtiquetasEntregaService
 {
 
-    private EtiquetasEntregaRepository $etiquetaEntregaRepository;
+    protected EtiquetaEntregaRepositoryInterface $etiquetaEntregaRepository;
+    protected PedidoRepositoryInterface $pedidoRepository;
 
-    public function __construct(EtiquetasEntregaRepository $etiquetaEntregaRepository) {
+    public function __construct(EtiquetaEntregaRepositoryInterface $etiquetaEntregaRepository, PedidoRepositoryInterface $pedidoRepository) {
         $this->etiquetaEntregaRepository = $etiquetaEntregaRepository;
+        $this->pedidoRepository = $pedidoRepository;
     }
 
     public function execute() {
-        return $this->etiquetaEntregaRepository->buscaEtiquetasEntrega();
-    }
-
-    public function buscaPedidosRecentes() {
         return [
-            'vendedor' => 'joao', 'produto' => 'etiqueta01', 'valor_total' => 2500,
-            'vendedor' => 'maria', 'produto' => 'etiqueta03', 'valor_total' => 3000,
-            'vendedor' => 'silva', 'produto' => 'etiqueta02', 'valor_total' => 5000,
+            'etiquetas' => $this->etiquetaEntregaRepository->buscaEtiquetasEntrega(),
+            'pedidos' => $this->pedidoRepository->buscaPedidosRecentes()
         ];
     }
+
 }
