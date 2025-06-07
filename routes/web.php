@@ -19,6 +19,9 @@ use App\Http\Controllers\RastreamentoPedidoController;
 Route::middleware(['splade'])->group(function () {
     Route::get('/', fn () => view('home'))->name('home');
     Route::get('/docs', fn () => view('docs'))->name('docs');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/transportadoras', [TransportadoraController::class, 'index'])->name('transportadora');
+    Route::get('/rastreamento-pedido', [RastreamentoPedidoController::class, 'index'])->name('rastreamento-pedido');
 
     // Registers routes to support the interactive components...
     Route::spladeWithVueBridge();
@@ -33,9 +36,8 @@ Route::middleware(['splade'])->group(function () {
     Route::spladeUploads();
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/transportadoras', [TransportadoraController::class, 'index'])->name('transportadora');
-Route::get('/rastreamento-pedido', [RastreamentoPedidoController::class, 'index'])->name('rastreamento-pedido');
+
+
 
 
 
