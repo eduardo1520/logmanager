@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Transportadora;
+use Illuminate\Database\Eloquent\Builder;
 
 class TransportadoraRepository implements TransportadoraRepositoryInterface
 {
@@ -10,11 +11,10 @@ class TransportadoraRepository implements TransportadoraRepositoryInterface
     /**
      * Obtém a contagem de pedidos agrupados por status.
      *
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Support\Builder
      */
-    public function buscaTransportadoras(): array {
-        $transportadoras = Transportadora::all();
-        return $transportadoras->toArray();
+    public function buscaTransportadoras(): Builder {
+        return Transportadora::query();
     }
 
 }

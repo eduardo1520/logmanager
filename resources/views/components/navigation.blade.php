@@ -17,6 +17,10 @@
                             {{ __('Dashboard') }}
                         </x-nav-link>
 
+                        <x-nav-link href="{{ route('transportadora') }}" :active="request()->routeIs('transportadora')">
+                            {{ __('Transportadora') }}
+                        </x-nav-link>
+
                         <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                             {{ __('Home') }}
                         </x-nav-link>
